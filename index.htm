@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宇宙小探險家學 Python 🚀</title>
+    <!-- 引入一個可愛的 Google 字體 -->
+    <link href="fonts.googleapis.com" rel="stylesheet">
+    <style>
+        /* --- CSS Reset 和基礎樣式 --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Baloo Paaji 2', cursive, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f9;
+            scroll-behavior: smooth; /* 平滑滾動 */
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+            color: #0d47a1; /* 深藍色 */
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- 頂部導覽列 --- */
+        header {
+            background-color: #0d47a1; /* 太空藍 */
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 25px;
+        }
+        nav ul li a {
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #ff9800; /* 鮮橙色 */
+        }
+
+        /* --- 主視覺區塊 (Hero Section) --- */
+        #hero {
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            z-index: 1;
+        }
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .btn-primary {
+            background-color: #ff5722; /* 鮮橙色 */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #e64a19;
+        }
+        /* 模擬火箭 GIF */
+        .rocket-img {
+            position: absolute;
+            right: 10%;
+            bottom: -50px;
+            width: 150px;
+            transform: rotate(-15deg);
+            animation: fly 4s infinite alternate ease-in-out;
+        }
+        @keyframes fly {
+            0% { transform: translateY(0) rotate(-15deg); }
+            100% { transform: translateY(-20px) rotate(-15deg); }
+        }
+
+        /* --- 通用區塊樣式 --- */
+        section {
+            padding: 80px 0;
+        }
+        .card-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- 互動模擬器區塊 --- */
+        #demo {
+            background-color: #e8f5e9; /* 淺綠色 */
+        }
+        .editor-container {
+            background-color: #263238; /* 深色背景模擬程式編輯器 */
+            color: #a5d6a7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: transparent;
+            border: none;
+            color: inherit;
+            font-family: monospace;
+            font-size: 1rem;
+            resize: none;
+            outline: none;
+        }
+        .console-output {
+            background-color: #37474f;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            min-height: 40px;
+            color: #ffe082;
+        }
+        .run-btn {
+            background-color: #4caf50; /* 綠色執行按鈕 */
+            color: white;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* --- 頁腳 --- */
+        footer {
+            background-color: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導覽列 (Sticky Header) -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">一顆笑臉行星</div>
+                <ul>
+                    <li><a href="#intro">介紹</a></li>
+                    <li><a href="#path">地圖</a></li>
+                    <li><a href="#demo">試玩</a></li>
+                    <li><a href="#parents">家長區</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主視覺區塊 (Hero Section) -->
+    <section id="hero">
+        <div class="container hero-content">
+            <h1>宇宙小探險家 🚀</h1>
+            <p>跟著小歐寶一起用 Python 解鎖程式宇宙！</p>
+            <a href="#path" class="btn btn-primary">免費開始冒險！</a>
+        </div>
+        <!-- 模擬一個火箭圖片 -->
+        <img src="i.imgur.com" alt="Rocket" class="rocket-img">
+    </section>
+
+    <!-- 介紹區塊 (Why Python?) -->
+    <section id="intro">
+        <div class="container">
+            <h2>為什麼選擇 Python？</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="icon">🧩</div>
+                    <h3>簡單易懂</h3>
+                    <p>語法就像說故事，小朋友輕鬆上手。</p>
+                </div>
+                <div class="card">
+                    <div class="icon">💻</div>
+                    <h3>用途廣泛</h3>
+                    <p>網站、遊戲、AI，未來無限可能。</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🌟</div>
+                    <h3>未來趨勢</h3>
+                    <p>全球頂尖企業都在使用的程式語言。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 學習路徑區塊 (Learning Path) -->
+    <section id="path" style="background-color: #f4f9ff;">
+        <div class="container">
+            <h2>探險地圖</h2>
+            <p style="text-align: center; margin-bottom: 40px;">沿著星星軌跡，一步步成為程式設計師！</p>
+            <!-- 這裡應該用 CSS 做一個視覺化的地圖，但這裡簡化為列表 -->
+            <div class="card-grid" style="flex-direction: column; gap: 15px;">
+                <div class="card" style="text-align: left;">
+                    <strong>關卡 1: 認識變數 🪐</strong>
+                    <p>學習如何儲存名字和數字，程式記憶小幫手。</p>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <strong>關卡 2: 迴圈的力量 🛰️</strong>
+                    <p>重複動作不費力，畫出滿天星星就靠它。</p>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <strong>關卡 3: 做出第一個遊戲！👾</strong>
+                    <p>彈珠遊戲還是打磚塊？動手實現你的創意！</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實際動手做 (Interactive Demo) -->
+    <section id="demo">
+        <div class="container">
+            <h2>馬上試試看！</h2>
+            <div class="editor-container">
+                <textarea id="codeEditor">print("Hello, Universe!")</textarea>
+                <button class="btn run-btn" onclick="runCode()">執行程式</button>
+                <div class="console-output" id="consoleOutput">
+                    <!-- 輸出結果會在這裡顯示 -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 家長/教師區塊 (Parents Info) -->
+    <section id="parents" style="background-color: #ffffff;">
+        <div class="container">
+            <h2>給地球總部 (家長) 的話</h2>
+            <p>我們提供安全、有趣的學習環境，專為 7-12 歲兒童設計。如有任何疑問，請隨時聯繫我們！</p>
+            <!-- 簡易的聯絡資訊 -->
+        </div>
+    </section>
+
+    <!-- 頁腳 (Footer) -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Coding Little Stars. 版權所有.</p>
+            <p>🚀 一起探索未來！</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // 模擬程式碼執行
+        function runCode() {
+            const code = document.getElementById('codeEditor').value;
+            const output = document.getElementById('consoleOutput');
+            output.textContent = '執行中...';
+
+            try {
+                // 簡易且不安全的 eval，實際產品需使用更安全的沙箱環境
+                // 這裡僅供視覺模擬
+                if (code.includes('print(')) {
+                    // 擷取 print 括號內的內容作為輸出
+                    const match = code.match(/print\((['"])(.*?)\1\)/);
+                    if (match && match[2]) {
+                        output.textContent = '輸出: ' + match[2];
+                    } else {
+                        output.textContent = '輸出: ' + code.replace('print(', '').replace(')', '');
+                    }
+                } else {
+                     output.textContent = '輸出: 程式碼已執行，但沒有可視輸出。';
+                }
+
+            } catch (error) {
+                output.textContent = '錯誤: ' + error.message;
+                output.style.color = '#ff5722'; // 錯誤時變橙色
+            }
+        }
+    </script>
+</body>
+</html>
